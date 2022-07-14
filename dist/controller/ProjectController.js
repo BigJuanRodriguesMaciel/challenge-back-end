@@ -23,8 +23,12 @@ const createProject = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return res.status(201).json({
             msg: `O titulo é obrigatório`,
         });
+    if (!ownerId)
+        return res.status(201).json({
+            msg: `O Id do usuário é obrigatório`,
+        });
     try {
-        yield Project_1.default.create({ title, tasks });
+        yield Project_1.default.create({ title, tasks, ownerId });
         return res.status(201).json({
             msg: `Projeto cadastrado com sucesso`,
         });
@@ -68,9 +72,11 @@ const updateProject = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
 });
-const getAllProjects = (res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllProjects = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const ownerId = req.params.ownerid;
+    console.log(ownerId);
     try {
-        const projects = yield Project_1.default.find();
+        const projects = yield Project_1.default.find({ ownerId });
         res.status(200).json({
             msg: `Projetos carregados com sucesso`,
             projects

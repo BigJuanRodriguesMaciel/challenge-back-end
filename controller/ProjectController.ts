@@ -10,8 +10,11 @@ const createProject = async (req: any, res: any) => {
     if(!title) return res.status(201).json({
         msg: `O titulo é obrigatório`,
     })
+    if(!ownerId) return res.status(201).json({
+        msg: `O Id do usuário é obrigatório`,
+    })
     try {
-        await Project.create({title, tasks})
+        await Project.create({title, tasks, ownerId})
         return res.status(201).json({
             msg: `Projeto cadastrado com sucesso`,
         })
@@ -55,9 +58,11 @@ const updateProject = async (req: any, res: any) => {
     }
 }
 
-const getAllProjects = async (res: any) => {
+const getAllProjects = async (req: any, res: any) => {
+    const ownerId = req.params.ownerid
+    console.log(ownerId)
     try {
-        const projects = await Project.find()
+        const projects = await Project.find({ownerId})
         res.status(200).json({
             msg: `Projetos carregados com sucesso`,
             projects 
