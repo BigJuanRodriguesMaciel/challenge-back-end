@@ -7,8 +7,13 @@ const express_1 = __importDefault(require("express"));
 const db_1 = __importDefault(require("./database/db"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const projects_1 = __importDefault(require("./routes/projects"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = process.env.PORT;
+app.use((0, cors_1.default)({
+    origin: '*',
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
+}));
 app.use(express_1.default.json());
 app.use(auth_1.default);
 app.use(projects_1.default);

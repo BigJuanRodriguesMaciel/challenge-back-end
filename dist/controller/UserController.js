@@ -70,7 +70,7 @@ const logInUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             name: user.name,
             email: user.email,
         }, `${secret}`);
-        return res.status(422).json({
+        return res.status(200).json({
             msg: `Seja bem-vindo ao sistema ${user.name}`,
             token
         });

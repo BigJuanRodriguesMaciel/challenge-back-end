@@ -62,7 +62,7 @@ const logInUser =  async (req:any, res:any) => {
             },
             `${secret}`
         )
-        return res.status(422).json({
+        return res.status(200).json({
             msg: `Seja bem-vindo ao sistema ${user.name}`,
             token
         })

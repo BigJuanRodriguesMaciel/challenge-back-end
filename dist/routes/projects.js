@@ -8,7 +8,7 @@ const ProjectController_1 = __importDefault(require("../controller/ProjectContro
 const auth_1 = require("../middlewares/auth");
 const projectsRoutes = (0, express_1.default)();
 projectsRoutes.post('/projects', auth_1.checkToken, ProjectController_1.default.createProject);
-projectsRoutes.get('/projects/:ownerid', ProjectController_1.default.getAllProjects);
-projectsRoutes.get('/projects/:id', ProjectController_1.default.getProject);
-projectsRoutes.put('/projects/:id', ProjectController_1.default.updateProject);
+projectsRoutes.get('/projects/:ownerid', auth_1.checkToken, ProjectController_1.default.getAllProjects);
+projectsRoutes.get('/projects/:id', auth_1.checkToken, ProjectController_1.default.getProject);
+projectsRoutes.put('/projects/:id', auth_1.checkToken, ProjectController_1.default.updateProject);
 exports.default = projectsRoutes;
